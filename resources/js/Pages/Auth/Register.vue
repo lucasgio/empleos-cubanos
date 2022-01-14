@@ -1,77 +1,114 @@
 <template>
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+   <GuestLayout>
+       <v-container class="fill-height">
+           <v-row align-center justify-center>
+               <v-col cols="12">
+                   <v-card width="700" height="auto" class="mx-auto rounded-lg" elevation="10">
+                       <v-row>
+                           <v-col cols="6" class="deep-purple darken-4 rounded-lg">
+                           </v-col>
+                           <v-col cols="6">
+                               <v-card-title class="subtitle-1 text-center deep-purple--text font-weight-bold">Bienvenido a Empleos Cubanos</v-card-title>
+                               <v-card-subtitle class="subtitle-2 deep-purple--text">Registre una nueva cuenta</v-card-subtitle>
+                               <v-card-text class="pa-2">
+                                   <v-form @submit.prevent="submit">
+                                       <v-text-field
+                                           v-model="form.email"
+                                           value="Email"
+                                           type="email"
+                                           rounded
+                                           label="Correo electronico"
+                                           prepend-inner-icon="mdi-email"
+                                           flat
+                                           required
+                                           outlined
+                                           placeholder="juanperez@gmail.com"
+                                           dense
+                                           filled
+                                       />
+                                       <v-text-field
+                                           v-model="form.name"
+                                           value="First Name"
+                                           type="text"
+                                           label="Nombre y apellidos"
+                                           prepend-inner-icon="mdi-account"
+                                           flat
+                                           rounded
+                                           required
+                                           outlined
+                                           placeholder="Juan Perez"
+                                           dense
+                                           filled
+                                       />
+                                       <v-text-field
+                                           v-model="form.password"
+                                           value="Password"
+                                           type="password"
+                                           label="Contraseña"
+                                           prepend-inner-icon="mdi-lock"
+                                           flat
+                                           rounded
+                                           required
+                                           outlined
+                                           placeholder="**********"
+                                           dense
+                                           filled
+                                       />
+                                       <v-text-field
+                                           v-model="form.password_confirmation"
+                                           value="Password Confirmation"
+                                           type="password"
+                                           label="Confirme la contraseña"
+                                           prepend-inner-icon="mdi-lock"
+                                           flat
+                                           rounded
+                                           required
+                                           outlined
+                                           placeholder="**********"
+                                           dense
+                                           filled
+                                       />
+                                       <v-card-actions>
+                                           <v-btn
+                                               text
+                                               rounded
+                                               small
+                                               plain
+                                               class="deep-purple--text font-weight-bold"
+                                               :href="route('login')"
+                                           >
+                                               Ya tengo una cuenta
+                                           </v-btn>
+                                           <v-spacer></v-spacer>
+                                           <v-btn
+                                               class="deep-purple darken-4 white--text pa-3"
+                                               rounded
+                                               small
+                                               type="submit"
+                                               :loading="form.processing"
+                                           >
+                                               Registrarse
+                                           </v-btn>
+                                       </v-card-actions>
+                                   </v-form>
+                               </v-card-text>
+                           </v-col>
+                       </v-row>
 
-        <jet-validation-errors class="mb-4" />
+                   </v-card>
+               </v-col>
+           </v-row>
+       </v-container>
+   </GuestLayout>
 
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
-            </div>
 
-            <div class="mt-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
-                <jet-label for="terms">
-                    <div class="flex items-center">
-                        <jet-checkbox name="terms" id="terms" v-model="form.terms" />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
-                        </div>
-                    </div>
-                </jet-label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </inertia-link>
-
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </jet-button>
-            </div>
-        </form>
-    </jet-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetCheckbox from "@/Jetstream/Checkbox";
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import GuestLayout from "@/Layouts/GuestLayout";
 
     export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors
-        },
-
+        components: {GuestLayout},
         data() {
             return {
                 form: this.$inertia.form({
@@ -86,9 +123,7 @@
 
         methods: {
             submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
+                this.form.post(this.route('register'))
             }
         }
     }
