@@ -1,43 +1,25 @@
 <template>
-    <v-container>
+    <v-container fluid>
         <v-row>
-            <v-col class="hidden-md-and-down" cols="2">
-                <v-sheet rounded="lg">
-                    <v-list color="transparent">
-                        <v-list-item
-                            v-for="n in 5"
-                            :key="n"
-                            link
-                        >
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    List Item {{ n }}
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-divider class="my-2"></v-divider>
-
-                        <v-list-item
-                            color="grey lighten-4"
-                            link
-                        >
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    Refresh
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-sheet>
-            </v-col>
-
             <v-col>
                 <v-sheet
-                    min-height="70vh"
+                    elevation="0"
+                    height="70vh"
                     rounded="lg"
                 >
-                    <!--  -->
+                    <v-row>
+                        <v-card-title class=" primary--text text-h5">Ultimas vacantes</v-card-title>
+                        <v-spacer></v-spacer>
+                        <v-card-subtitle class="primary--text mt-3 font-weight-bold text-uppercase">Ver todas</v-card-subtitle>
+                    </v-row>
+                    <v-row>
+                        <Cards/>
+                        <Cards/>
+                        <Cards/>
+                        <Cards/>
+                        <Cards/>
+                    </v-row>
+
                 </v-sheet>
             </v-col>
         </v-row>
@@ -45,11 +27,20 @@
 </template>
 
 <script>
+import HeroImage from "@/Components/UI/HeroImage";
+import Cards from "@/Components/UI/Cards";
+
 export default {
-    name: "MainComponent"
+    name: "MainComponent",
+    components: {Cards, HeroImage},
+    data: () => ({
+        professions: [
+            'Programador',
+            'Medico',
+            'Dependiente',
+            'Cocinero',
+        ]
+    })
 }
 </script>
 
-<style scoped>
-
-</style>
